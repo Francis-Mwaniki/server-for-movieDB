@@ -1,6 +1,6 @@
 const express =require('express');
-const { MovieDb } = require('moviedb-promise')
 require('dotenv').config();
+const { MovieDb } = require('moviedb-promise')
 const moviedb = new MovieDb(process.env.API_KEY)
 const cors= require('cors');
 //init express
