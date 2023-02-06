@@ -7,8 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "nodemon": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "env-cmd node --watch index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
