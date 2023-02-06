@@ -1,8 +1,6 @@
 const express =require('express');
-const dotenv = require('dotenv');
-dotenv.config();
-require('dotenv').config();
 const { MovieDb } = require('moviedb-promise')
+require('dotenv').config();
 const moviedb = new MovieDb(process.env.API_KEY)
 const cors= require('cors');
 //init express
@@ -12,7 +10,6 @@ const port = 8000 || process.env.PORT;
 
 // middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 //create a route
