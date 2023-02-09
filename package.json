@@ -6,9 +6,7 @@
   "author": "francis mwaniki",
   "license": "MIT",
   "private": true,
-  "engines": {
-    "node": "16.19.0"
-  },
+  
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
