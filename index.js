@@ -16,11 +16,11 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 //create a route
-app.get('/all', (req, res) => {
+app.get('/api/v1/all', (req, res) => {
     res.send('Hello World!');
 });
 //all top rated movies
-app.get('/top-rated', async(req, res) => {
+app.get('/api/v1/top-rated', async(req, res) => {
     console.log(req.params.id);
     await moviedb.movieTopRated()
     .then(async(response) => {
@@ -30,7 +30,7 @@ app.get('/top-rated', async(req, res) => {
     })
     });
     //all now playing movies
-app.get('/now', async(req, res) => {
+app.get('/api/v1/now', async(req, res) => {
     console.log(req.params.id);
     await moviedb.movieNowPlaying()
     .then(async(response) => {
@@ -41,7 +41,7 @@ app.get('/now', async(req, res) => {
     })
     });
     //all most popular movies
-app.get('/popular', async(req, res) => {
+app.get('/api/v1/popular', async(req, res) => {
     console.log(req.params.id);
     await moviedb.moviePopular()
     .then(async(response) => {
@@ -51,7 +51,7 @@ app.get('/popular', async(req, res) => {
     })
     });
 //search for a movies
-app.get('/search/:query', async (req, res) => {
+app.get('/api/v1/search/:query', async (req, res) => {
     console.log(req.params.query);
     await moviedb.searchMovie({ query: req.params.query })
     .then(async(response) => {
@@ -65,7 +65,7 @@ app.get('/search/:query', async (req, res) => {
 }
 );
 //search a person
-app.get('/person/:query', (req, res) => {
+app.get('/api/v1/person/:query', (req, res) => {
     moviedb.searchPerson({ query: req.params.query })
     .then(async(response) => {
         const { results } = await response;
@@ -75,7 +75,7 @@ app.get('/person/:query', (req, res) => {
     })
     });
 //search with movie keyword
-app.get('/keyword/:query', (req, res) => {
+app.get('/api/v1/keyword/:query', (req, res) => {
     moviedb.searchKeyword({ query: req.params.query })
     .then(response => {
         res.send(response);
@@ -83,7 +83,12 @@ app.get('/keyword/:query', (req, res) => {
         console.log(error);
     })
 });
-
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(__dirname + "/dist/"));
+    app.get("*", (req, res) => {
+      res.sendFile(__dirname + "/dist/index.html");
+    });
+  }
 //listen on port 3000
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
