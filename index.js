@@ -11,10 +11,6 @@ const port =  process.env.PORT || 8000;
 // middleware
 app.use(express.json());
 app.use(cors());
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 //create a route
 app.get('/api/v1/all', (req, res) => {
     res.send('Hello World!');
